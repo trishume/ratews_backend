@@ -6,3 +6,4 @@ authors = ["Tristan Hume <tristan@thume.ca>"]
 
 [dependencies]
 iron = "0.1.12"
+rusqlite = "0.0.11"

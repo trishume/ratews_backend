@@ -5,5 +5,4 @@ version = "0.0.1"
 authors = ["Tristan Hume <tristan@thume.ca>"]
 
 [dependencies]
-hyper = "0.3.0"
-iron = "0.1.11"
+iron = "0.1.12"

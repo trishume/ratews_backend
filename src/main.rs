@@ -2,9 +2,11 @@
 #![allow(dead_code,unused_imports,deprecated)]
 extern crate iron;
 extern crate rusqlite;
+// extern crate mount;
 
 use iron::prelude::*;
 use iron::status;
+// use mount::Mount;
 // use core::fmt::Display;
 use std::path::Path;
 
@@ -19,23 +21,28 @@ fn print_vec<T: std::fmt::Display>(v: &[T]) {
     }
 }
 
+fn api_find_scale(req: &mut Request) -> IronResult<Response> {
+    Ok(Response::with((status::Ok, "Hello!")))
+}
+
 fn main() {
-    // fn hello_world(_: &mut Request) -> IronResult<Response> {
-    //     Ok(Response::with((status::Ok, "Hello World!")))
-    // }
-
-    // println!("Serving on localhost:3000...");
-    // Iron::new(hello_world).http("localhost:3000").unwrap();
-
-    let mapper_path = Path::new("/Users/tristan/Box/Dev/Projects/wikicrush/data/xindex.db");
-    // let bin_file = "/Users/tristan/Documents/WikiData/indexbi.bin";
-    let bin_file = "/Users/tristan/Box/Dev/Projects/wikicrush/data/indexbi.bin";
-    let mapper = mapping::Mapper::new(mapper_path);
-    let mut graph = wiki::load_bin_graph(bin_file).ok().unwrap();
+    let base_path = Path::new("/Users/tristan/Box/Dev/Projects/wikicrush/data/");
+    let mapper_path = base_path.join("xindex.db");
+    let bin_path = base_path.join("indexbi.bin");
+    let bin_path_s = (*bin_path).to_str().unwrap();
+    let mapper = mapping::Mapper::new(&*mapper_path);
+    let mut graph = wiki::load_bin_graph(bin_path_s).ok().unwrap();
 
     let m_s_path = integ::find_path(&mut graph,&mapper,"alphabet","a");
     match m_s_path {
         Ok(path) => print_vec(&path[..]),
         Err(s) => println!("Error: {}",s),
     }
+
+    // let mut mount = Mount::new();
+    // // mount.mount("/", Static::new(Path::new("static/")));
+    // mount.mount("/api/findscale", api_find_scale);
+
+    // println!("Starting server on port 3000...");
+    // Iron::new(mount).http("127.0.0.1:3000").unwrap();
 }

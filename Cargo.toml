@@ -5,6 +5,10 @@ version = "0.0.1"
 authors = ["Tristan Hume <tristan@thume.ca>"]
 
 [dependencies]
-iron = "0.1.12"
-mount = "0.0.5"
-rusqlite = "0.0.11"
+gcc = "=0.3.1"
+hyper = "=0.3.0"
+iron = "=0.1.11"
+mount = "=0.0.5"
+rusqlite = "=0.0.11"
+persistent = "=0.0.3"
+urlencoded = "=0.1.1"

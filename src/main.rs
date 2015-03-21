@@ -28,4 +28,9 @@ fn main() {
         Ok(path) => print_vec(&path[..]),
         Err(s) => println!("Error: {}",s),
     }
+
+    loop {
+        let input = std::old_io::stdin().read_line().ok().expect("Failed to read line");
+        println!("{}", input)
+    }
 }

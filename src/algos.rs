@@ -96,6 +96,34 @@ pub fn shortest_path(graph : &mut Graph, start_page : usize, end_page : usize) -
             break;
         }
 
+        for linked in graph.links(page) {
+            if graph.user_data(linked) == 0 {
+                graph.set_user_data(linked, page as u32); // parent pointer
+                queue.push_back(linked);
+            }
+        }
+    }
+    // kk we found the thing, reconstruct the path
+    let mut cur_page : usize = end_page;
+    let mut path = vec![end_page];
+    while cur_page != start_page {
+        cur_page = graph.user_data(cur_page) as usize; // work back
+        path.insert(0,cur_page);
+    }
+    return Some(path);
+}
+pub fn shortest_bid_path(graph : &mut Graph, start_page : usize, end_page : usize) -> Option<Vec<usize>> {
+    let mut queue = VecDeque::new();
+    queue.push_back(start_page);
+    loop {
+        if queue.is_empty() {
+            return None;
+        }
+        let page = queue.pop_front().unwrap();
+        if page == end_page {
+            break;
+        }
+
         for linked in graph.bid_links(page) {
             if graph.user_data(linked) == 0 {
                 graph.set_user_data(linked, page as u32); // parent pointer

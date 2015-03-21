@@ -16,12 +16,16 @@ fn print_vec<T: std::fmt::Display>(v: &[T]) {
 }
 
 fn main() {
-    let base_path = Path::new("/Users/tristan/Box/Dev/Projects/wikicrush/data/");
+    let base_path = Path::new("/Users/tristan/Documents/WikiData/");
+    // let base_path = Path::new("/Users/tristan/Box/Dev/Projects/wikicrush/data/");
+    println!("log|Loading db");
     let mapper_path = base_path.join("xindex.db");
     let bin_path = base_path.join("indexbi.bin");
     let bin_path_s = (*bin_path).to_str().unwrap();
     let mapper = mapping::Mapper::new(&*mapper_path);
+    println!("log|Loading graph");
     let mut graph = wiki::load_bin_graph(bin_path_s).ok().unwrap();
+    println!("log|Done loading!");
 
     loop {
         let input = std::old_io::stdin().read_line().ok().expect("Failed to read line");

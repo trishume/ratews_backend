@@ -3,6 +3,7 @@ name = "ratews_backend"
 version = "0.0.1"
 dependencies = [
  "iron 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)",
+ "mount 0.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "rusqlite 0.0.11 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -132,6 +133,16 @@ version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
+name = "mount"
+version = "0.0.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "iron 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)",
+ "sequence_trie 0.0.10 (registry+https://github.com/rust-lang/crates.io-index)",
+ "url 0.2.27 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "num_cpus"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -191,6 +202,11 @@ dependencies = [
 [[package]]
 name = "rustc-serialize"
 version = "0.3.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "sequence_trie"
+version = "0.0.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]

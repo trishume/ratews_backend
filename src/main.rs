@@ -2,11 +2,11 @@
 #![allow(dead_code,unused_imports,deprecated)]
 extern crate iron;
 extern crate rusqlite;
-// extern crate mount;
+extern crate mount;
 
 use iron::prelude::*;
 use iron::status;
-// use mount::Mount;
+use mount::Mount;
 // use core::fmt::Display;
 use std::path::Path;
 
@@ -39,10 +39,10 @@ fn main() {
         Err(s) => println!("Error: {}",s),
     }
 
-    // let mut mount = Mount::new();
-    // // mount.mount("/", Static::new(Path::new("static/")));
-    // mount.mount("/api/findscale", api_find_scale);
+    let mut mount = Mount::new();
+    // mount.mount("/", Static::new(Path::new("static/")));
+    mount.mount("/api/findscale", api_find_scale);
 
-    // println!("Starting server on port 3000...");
-    // Iron::new(mount).http("127.0.0.1:3000").unwrap();
+    println!("Starting server on port 3000...");
+    Iron::new(mount).http("127.0.0.1:3000").unwrap();
 }

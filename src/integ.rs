@@ -9,8 +9,11 @@ pub fn find_path(graph : &mut Graph, mapper : &Mapper,
         Some(p1) => p1,
         None => return Err("Can't find first page"),
     };
-    let p2 = mapper.title_to_id(stop).unwrap();
-    println!("Searching from {} to {}", p1,p2);
+    let p2 = match mapper.title_to_id(stop) {
+        Some(p1) => p1,
+        None => return Err("Can't find second page"),
+    };
+    // println!("Searching from {} to {}", p1,p2);
 
     let m_path = algos::shortest_path(graph,p1,p2);
     algos::clear_marks(graph);

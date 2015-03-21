@@ -97,7 +97,7 @@ pub fn load_bin_graph(bin_path_s : &str) -> Result<Graph,&str> {
     // }
 
     let bin_path = Path::new(bin_path_s);
-    println!("Analyzing {}...",bin_path.display());
+    // println!("Analyzing {}...",bin_path.display());
 
     let mut file = File::open(&bin_path).ok().expect("Could not open graph file.");
 
@@ -105,7 +105,7 @@ pub fn load_bin_graph(bin_path_s : &str) -> Result<Graph,&str> {
     {
         let mut buf : Vec<u8> = file.read_to_end().ok().expect("Could not read file.");
         let len = buf.len();
-        println!("Read {} bytes of file!", len);
+        // println!("Read {} bytes of file!", len);
         if len % 4 != 0 {
             return Err("Invalid file size!");
         }
@@ -113,8 +113,8 @@ pub fn load_bin_graph(bin_path_s : &str) -> Result<Graph,&str> {
         graph_data = unsafe { Vec::from_raw_buf(data_ptr, len / 4)};
     }
     let graph = Graph { data: graph_data };
-    println!("Read {} words of file!", graph.data.len());
-    println!("Total pages: {}", graph.page_count());
+    // println!("Read {} words of file!", graph.data.len());
+    // println!("Total pages: {}", graph.page_count());
     return Ok(graph);
 
     // find_conn_components(&mut graph);

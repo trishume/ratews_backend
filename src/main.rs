@@ -23,14 +23,20 @@ fn main() {
     let mapper = mapping::Mapper::new(&*mapper_path);
     let mut graph = wiki::load_bin_graph(bin_path_s).ok().unwrap();
 
-    let m_s_path = integ::find_path(&mut graph,&mapper,"alphabet","a");
-    match m_s_path {
-        Ok(path) => print_vec(&path[..]),
-        Err(s) => println!("Error: {}",s),
-    }
-
     loop {
         let input = std::old_io::stdin().read_line().ok().expect("Failed to read line");
-        println!("{}", input)
+        let procd : Vec<&str> = input.trim().split_str("|").collect();
+        if procd[0] == "godie" {
+            break;
+        }
+        if procd.len() != 2 {
+            continue;
+        }
+
+        let m_s_path = integ::find_path(&mut graph,&mapper,procd[0],procd[1]);
+        match m_s_path {
+            Ok(path) => println!("path|{}",path.connect("|")),
+            Err(s) => println!("error|{}",s),
+        }
     }
 }

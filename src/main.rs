@@ -39,7 +39,8 @@ fn main() {
 
         let m_s_path = integ::find_path(&mut graph,&mapper,procd[0],procd[1]);
         match m_s_path {
-            Ok(path) => println!("path|{}",path.connect("|")),
+            Ok((path,true)) => println!("bpath|{}",path.connect("|")),
+            Ok((path,false)) => println!("path|{}",path.connect("|")),
             Err(s) => println!("error|{}",s),
         }
     }

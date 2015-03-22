@@ -4,7 +4,7 @@ use wiki::Graph;
 use mapping::Mapper;
 
 pub fn find_path(graph : &mut Graph, mapper : &Mapper,
-                 start : &str, stop : &str) -> Result<Vec<String>,&'static str> {
+                 start : &str, stop : &str) -> Result<(Vec<String>,bool),&'static str> {
     let p1 = match mapper.title_to_id(start) {
         Some(p1) => p1,
         None => return Err("Can't find first page"),
@@ -16,11 +16,11 @@ pub fn find_path(graph : &mut Graph, mapper : &Mapper,
     // println!("Searching from {} to {}", p1,p2);
 
     let m_bid_path = algos::shortest_bid_path(graph,p1,p2);
-    let m_path = match m_bid_path {
-        Some(path) => Some(path),
+    let (m_path,bid) = match m_bid_path {
+        Some(path) => (Some(path),true),
         None => {
             algos::clear_marks(graph);
-            algos::shortest_path(graph,p1,p2)
+            (algos::shortest_path(graph,p1,p2),false)
         }
     };
     algos::clear_marks(graph);
@@ -28,7 +28,7 @@ pub fn find_path(graph : &mut Graph, mapper : &Mapper,
         path.iter().map(|id| {mapper.id_to_title(*id).unwrap()}).collect()
     });
     match m_s_path {
-        Some(path) => Ok(path),
+        Some(path) => Ok((path,bid)),
         None => Err("Can't find path"),
     }
 }

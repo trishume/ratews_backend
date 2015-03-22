@@ -25,7 +25,7 @@ fn main() {
     let mapper = mapping::Mapper::new(&*mapper_path);
     println!("log|Loading graph");
     let mut graph = wiki::load_bin_graph(bin_path_s).ok().unwrap();
-    println!("log|Done loading!");
+    println!("done|Done loading!");
 
     loop {
         let input = std::old_io::stdin().read_line().ok().expect("Failed to read line");
